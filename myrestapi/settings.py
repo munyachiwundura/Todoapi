@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-gqakgy*+0k2=8euc032jc0b^b#anwy&jf3_x)k78yr9tlu3=97
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["todoapponsteroidsapi.herokuapp.com", "127.0.0.1:8000"]
+ALLOWED_HOSTS = ["todoapponsteroidsapi.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "todoapi",
+    "blogapi",
+    "tinymce",
 ]
 
 MIDDLEWARE = [
