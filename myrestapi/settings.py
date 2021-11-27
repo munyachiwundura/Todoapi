@@ -81,11 +81,20 @@ WSGI_APPLICATION = "myrestapi.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "database name",
+        "USER": "database user",
+        "PASSWORD": "database password",
+        "HOST": "database endpoint",
+        "PORT": "database port",
     }
 }
 
+
+import dj_database_url
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES["default"].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
