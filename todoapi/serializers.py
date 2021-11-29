@@ -5,3 +5,5 @@ class TodoItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = TodoItem
         fields = '__all__'
+
+
