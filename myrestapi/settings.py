@@ -93,20 +93,20 @@ WSGI_APPLICATION = "myrestapi.wsgi.application"
 
 # Production Database
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "database name",
-#         "USER": "database user",
-#         "PASSWORD": "database password",
-#         "HOST": "database endpoint",
-#         "PORT": "database port",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "database name",
+        "USER": "database user",
+        "PASSWORD": "database password",
+        "HOST": "database endpoint",
+        "PORT": "database port",
+    }
+}
 
 
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES["default"].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES["default"].update(db_from_env)
 
 
 # Development Database
