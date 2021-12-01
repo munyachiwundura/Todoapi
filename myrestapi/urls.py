@@ -24,6 +24,7 @@ urlpatterns = [
     path("api/", include("rest_framework.urls")),
     path("todoapi/", include("todoapi.urls")),
     path("blogapi/", include("blogapi.urls")),
+    path("mail/", include("mailing_list.urls")),
     path("project_api/", include("projects_api.urls")),
     path("tinymce/", include("tinymce.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
