@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import serializers
-
+from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from blogapi.models import BlogPost
@@ -11,7 +11,10 @@ from blogapi.serializers import BlogPostSerializer
 
 @api_view(["GET"])
 def apiOverview(request):
-    api_urls = {"Posts": "/Posts/"}
+    api_urls = {
+        "All blog Posts": reverse(blogposts, request=request),
+        "Single Blog Post": reverse(blogpost, args=[1], request=request),
+    }
     return Response(api_urls)
 
 

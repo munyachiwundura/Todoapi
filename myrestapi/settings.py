@@ -30,7 +30,7 @@ TEMPLATE_DIR = BASE_DIR / "templates"
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["todoapponsteroidsapi.herokuapp.com", "127.0.0.1"]
 
@@ -93,20 +93,20 @@ WSGI_APPLICATION = "myrestapi.wsgi.application"
 
 # Production Database
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "database name",
-        "USER": "database user",
-        "PASSWORD": "database password",
-        "HOST": "database endpoint",
-        "PORT": "database port",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "database name",
+#         "USER": "database user",
+#         "PASSWORD": "database password",
+#         "HOST": "database endpoint",
+#         "PORT": "database port",
+#     }
+# }
 
 
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES["default"].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES["default"].update(db_from_env)
 
 
 # Development Database
