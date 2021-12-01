@@ -89,28 +89,33 @@ WSGI_APPLICATION = "myrestapi.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "database name",
-        "USER": "database user",
-        "PASSWORD": "database password",
-        "HOST": "database endpoint",
-        "PORT": "database port",
-    }
-}
 
-
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES["default"].update(db_from_env)
-
+# Production Database
 
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "database name",
+#         "USER": "database user",
+#         "PASSWORD": "database password",
+#         "HOST": "database endpoint",
+#         "PORT": "database port",
 #     }
 # }
+
+
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES["default"].update(db_from_env)
+
+
+# Development Database
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 # Password validation
@@ -167,6 +172,17 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# E-mail setup
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "thebreadbasketzw@gmail.com"
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASSWORD"] 
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "default from email"
 
 
 # Internationalization

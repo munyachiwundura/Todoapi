@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from mailing_list.models import MailItem
 from mailing_list.serializers import MailItemSerializer
 from rest_framework.permissions import IsAuthenticated
+from django.core.mail import send_mail as send_email
 
 
 # Create your views here.
@@ -15,7 +16,14 @@ from rest_framework.permissions import IsAuthenticated
 def send_mail(request):
     serializer = MailItemSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        mail = serializer.save()
+        send_email(
+            mail.subject,
+            mail.project_summary,
+            "from@example.com",
+            [mail.email],
+            fail_silently=False,
+        )
     return Response(serializer.data)
 
 
