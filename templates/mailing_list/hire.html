@@ -1,0 +1,73 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You {{user}}</title>
+</head>
+
+<!-- <style>
+    .bi-facebook:hover {
+        color: #4267b4;
+    }
+    .bi-twitter:hover {
+        color: #1da1f2;
+    }
+    .bi-instagram:hover {
+        color: #e1306c;
+    }
+    .bi-linkedin:hover {
+        color: #0376a8;
+    }
+</style> -->
+
+<body style="display: flex;
+        justify-content: center;">
+    <div style="
+    width: 500px;
+    background-color: #0e151f;
+    color: #fff;
+    padding: 3rem;
+    height: fit-content;" class="container">
+        <h1 style="color: #bfe4f7;
+        font-weight: 600;
+        font-size: 2rem;
+        margin-bottom: 2rem;">Calling you soon!</h1>
+        <p style="font-size: 1rem;
+        color: #fff;
+        line-height: 1.2rem;
+        margin: 0.5rem">Thank you {{name}} for reaching out so I can work with you on:</p>
+        <p style=" font-style: italic;
+        color: #fff;
+        font-weight: 200;
+        font-style: 0.6rem;" class="quote">{{ project }}</p>
+        <p style=" font-size: 1rem;
+        color: #fff;
+        line-height: 1.2rem;
+        margin: 0.5rem">I look forward to working with {{company}}. <br> If I do not respond soon enough feel free to reply to this email or contact me on my socials</p>
+        <div style=" margin-top: 2rem;
+        display: flex;
+        justify-content: space-around;"  class="icons">
+            <a style="text-decoration: none;
+            color: #fff;" href="">
+                <i style="font-size: 3rem;
+                position: relative;" class="bi bi-facebook"></i>
+            </a>
+            <a style="text-decoration: none;
+            color: #fff;" href="">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a style="text-decoration: none;
+            color: #fff;" href="">
+                <i class="bi bi-twitter"></i>
+            </a>
+            <a style="text-decoration: none;
+            color: #fff;" href="">
+                <i class="bi bi-linkedin"></i>
+            </a>
+        </div>
+        <img style="margin-top: 3rem;" src={% static "mailing_list/therealmunya_hire_email.png" %}></img>
+    </div>
+</body>
+</html>

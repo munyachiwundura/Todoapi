@@ -6,6 +6,8 @@ from mailing_list.models import MailItem
 from mailing_list.serializers import MailItemSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.core.mail import send_mail as send_email
+from django.template.loader import render_to_string
+from django.conf import settings
 
 
 # Create your views here.
@@ -17,12 +19,22 @@ def send_mail(request):
     serializer = MailItemSerializer(data=request.data)
     if serializer.is_valid():
         mail = serializer.save()
+        msg_plain = f"Thank you {mail.name} for asking for my help with {mail.project_summary}, I look forword to working with {mail.company}. If Do not respond soon enough feel freee to dm me on  my socials"
+        msg_html = render_to_string(
+            "mailing_list/hire.html",
+            {
+                "name": mail.name,
+                "project": mail.project_summary,
+                "company": mail.company,
+            },
+        )
         send_email(
             mail.subject,
-            mail.project_summary,
-            "from@example.com",
+            msg_plain,
+            settings.EMAIL_HOST_USER,
             [mail.email],
             fail_silently=False,
+            html_message=msg_html,
         )
     return Response(serializer.data)
 
