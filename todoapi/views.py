@@ -29,8 +29,8 @@ def apiOverview(request):
         "Update and Item": reverse(updatetodo, args=[1], request=request),
         "Delete and Item": reverse(deletetodo, args=[1], request=request),
         "Register": reverse(register, request=request),
-        "Access Token": f"{base_url}/token/",
-        "Refresh Token": f"{base_url}/token/refresh/",
+        "Access Token": f"{base_url}token/",
+        "Refresh Token": f"{base_url}token/refresh/",
     }
     return Response(api_urls)
 
