@@ -18,6 +18,7 @@ class Project(models.Model):
     review = models.CharField(max_length=500)
     rating = models.IntegerField(default=5)
     reviewer = models.CharField(max_length=255)
+    color = models.CharField(max_length=255)
     reviewer_image = models.ImageField(upload_to=get_upload_path)
     cover_image = models.ImageField(upload_to=get_upload_path)
     featured = models.BooleanField(default=False)
