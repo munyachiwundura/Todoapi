@@ -52,11 +52,12 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "corsheaders",
     "mailing_list",
+    "github_storages",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -118,6 +119,12 @@ DATABASES["default"].update(db_from_env)
 #         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+
+DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
+GITHUB_HANDLE = "munyachiwundura"
+GITHUB_REPO_NAME = "storage"
+ACCESS_TOKEN = "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"
+MEDIA_BUCKET_NAME = "bucket"
 
 
 # Password validation

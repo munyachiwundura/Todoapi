@@ -20,6 +20,8 @@ class Project(models.Model):
     reviewer = models.CharField(max_length=255)
     reviewer_image = models.ImageField(upload_to=get_upload_path)
     cover_image = models.ImageField(upload_to=get_upload_path)
+    featured = models.BooleanField(default=False)
+    link = models.URLField(max_length=2000)
 
     def __str__(self):
         return self.title

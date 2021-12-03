@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from rest_framework import serializers
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from projects_api.models import Project, Image
@@ -18,9 +17,14 @@ def apiOverview(request):
 @api_view(["GET"])
 def projects(request):
     project = Project.objects.all()
-    # images = Image.objects.get(project=project)
     serializer = ProjectSerializer(project, many=True)
-    # images_serialized = ImageSerializer(images, many=False)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+def featuredProjects(request):
+    project = Project.objects.filter(featured=True)
+    serializer = ProjectSerializer(project, many=True)
     return Response(serializer.data)
 
 
