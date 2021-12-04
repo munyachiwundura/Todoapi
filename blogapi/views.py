@@ -24,6 +24,12 @@ def blogposts(request):
     serializer = BlogPostSerializer(todo_items, many=True)
     return Response(serializer.data)
 
+@api_view(["GET"])
+def featuredblogposts(request):
+    todo_items = BlogPost.objects.filter(featured=True)
+    serializer = BlogPostSerializer(todo_items, many=True)
+    return Response(serializer.data)
+
 
 @api_view(["GET"])
 def blogpost(request, pk):

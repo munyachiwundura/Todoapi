@@ -10,6 +10,7 @@ class BlogPost(models.Model):
     date = models.DateTimeField()
     cover = models.ImageField(upload_to="media/blogposts")
     text = tinymce_models.HTMLField()
+    featured = models.BooleanField(default=True, null=False, blank=False)
 
     def __str__(self):
         return self.title
