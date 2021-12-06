@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.reverse import reverse
 from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -10,7 +11,12 @@ from projects_api.serializers import ProjectSerializer, ImageSerializer
 
 @api_view(["GET"])
 def apiOverview(request):
-    api_urls = {"Posts": "/Posts/"}
+    api_urls = {
+        "All Projects": reverse(projects, request=request), 
+        "Featured Projects": reverse(featuredProjects, request=request), 
+        "Project": reverse(project, args=[1], request=request),
+        "Project Images": reverse(projectImages, args=[1], request=request),
+    }
     return Response(api_urls)
 
 

@@ -26,6 +26,8 @@ class TodoItem(models.Model):
     category = models.ForeignKey(TodoCategory, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     time = models.DateTimeField()
+    end_date = models.DateField()
+    end_time = models.TimeField()
     status = models.BooleanField(default=False, null=False, blank=False)
 
     def __str__(self):

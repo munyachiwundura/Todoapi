@@ -9,7 +9,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from todoapi.models import TodoItem
 from todoapi.serializers import TodoItemSerializer, RegisterSerializer
 from django.views.decorators.csrf import csrf_exempt
-import json
+from datetime import datetime, timedelta
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
@@ -24,7 +24,10 @@ from django.contrib.auth.models import User
 def apiOverview(request):
     base_url = reverse(apiOverview, request=request)
     api_urls = {
-        "View all Todos": reverse(todos, request=request),
+        "All Todos": reverse(todos, request=request),
+        "All Analytics": reverse(allAnalytics, request=request),
+        "Weekly Analytics": reverse(weeklyAnalytics, request=request),
+        "Monthly Analytics": reverse(monthlyAnalytics, request=request),
         "Add an Item": reverse(addtodo, request=request),
         "Update and Item": reverse(updatetodo, args=[1], request=request),
         "Delete and Item": reverse(deletetodo, args=[1], request=request),
@@ -103,3 +106,66 @@ def deletetodo(request, pk):
     task.delete()
 
     return Response(f"item {pk} was deleted")
+
+
+##### todoItems analytics #####
+
+
+# weekly analytics
+
+
+@permission_classes([IsAuthenticated])
+@api_view(["POST"])
+def weeklyAnalytics(request):
+
+    user = request.user
+    data = {}
+    next_seven_days = []
+    day_one = datetime.strptime(request.data["end_date"], "%Y-%m-%d")
+
+    for n in range(1, 7):
+        next_seven_days.append(str(day_one + timedelta(days=n))[0:10])
+
+    for day in next_seven_days:
+        data[day] = {
+            "total": len(TodoItem.objects.filter(end_date=day, user=user)),
+            "done": len(
+                TodoItem.objects.filter(end_date=day).filter(status=True, user=user)
+            ),
+        }
+
+    return Response(data)
+
+
+# Monthy Analytics
+
+
+@permission_classes([IsAuthenticated])
+@api_view(["POST"])
+def monthlyAnalytics(request):
+
+    user = request.user
+    month = request.data["month"]
+    data = {
+        "month": datetime.date(1900, int(month), 1).strftime("%B"),
+        "total": len(TodoItem.objects.filter(end_date__month=month, user=user)),
+        "done": len(
+            TodoItem.objects.filter(end_date__month=month).filter(
+                status=True, user=user
+            )
+        ),
+    }
+    return Response(data)
+
+
+@permission_classes([IsAuthenticated])
+@api_view(["GET"])
+def allAnalytics(request):
+
+    user = request.user
+    data = {
+        "total": len(TodoItem.objects.filter(user=user)),
+        "done": len(TodoItem.objects.filter(status=True, user=user)),
+    }
+
+    return Response(data)
